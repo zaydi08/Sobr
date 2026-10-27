@@ -1,21 +1,19 @@
-//
-//  ContentView.swift
-//  Sobr
-//
-//  Created by Zayd Ibrahim on 10/25/26.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var store: SettingsStore
+
     var body: some View {
-        VStack {
-            Text("Sobr")
+        if store.settings.hasCompletedSetup {
+            HomeView()
+        } else {
+            SetupView()
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(SettingsStore())
+        .environmentObject(SessionStore())
 }
